@@ -5,7 +5,8 @@ reload(sys)
 sys.setdefaultencoding("utf8")
 from urllib2 import urlopen, URLError
 from json import JSONDecoder
-urls ="http://ip.taobao.com/service/getIpInfo.php?ip={}"
+# urls ="http://ip.taobao.com/service/getIpInfo.php?ip={}"
+urls = 'http://ipinfo.io/{}/json'
 
 
 def locateip(ip):
@@ -43,11 +44,9 @@ def main():
     else:
         target = sys.argv[1]
     data = locateip(target)
-    if data["code"] == 0:
-        datu = data["data"]
-        for i in datu:
-            if datu[i]:
-                print i + " >>>>> " + datu[i]
+    for i in data:
+        if data[i]:
+            print i + " >>>>> " + data[i]
 
 
 if __name__ == '__main__':
