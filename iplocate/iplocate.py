@@ -1,16 +1,20 @@
 #!/usr/bin/python
-#coding=utf8
+# coding=utf8
 import sys
 reload(sys)
 sys.setdefaultencoding("utf8")
 from urllib2 import urlopen, URLError
-from json import JSONDecoder
-# urls ="http://ip.taobao.com/service/getIpInfo.php?ip={}"
+from json import loads
+from sys import argv
+cn_urls = "http://ip.taobao.com/service/getIpInfo.php?ip={}"
 urls = 'http://ipinfo.io/{}/json'
 
 
-def locateip(ip):
-    url = urls.format(ip)
+def locateip(ip, cn=False):
+    if cn:
+        url = cn_urls.format(ip)
+    else:
+        url = urls.format(ip)
     handle = ""
     try:
         handle = urlopen(url)
@@ -19,31 +23,36 @@ def locateip(ip):
         exit(1)
     reader = handle.read()
     handle.close()
-    return JSONDecoder().decode(reader)
+    return loads(reader)
 
 
 def myip():
-    import re
-    url = "http://pv.sohu.com/cityjson?id=utf-8"
+    __url = "http://ipinfo.io/json"
     handle = ""
     try:
-        handle = urlopen(url)
+        handle = urlopen(__url)
     except URLError:
         print('网络连接出现问题')
         exit(1)
     reader = handle.read()
     handle.close()
-    regs = re.compile("""var returnCitySN = {"cip": "(.+?)",""", re.DOTALL)
-    return regs.findall(reader)
+    return loads(reader)
 
 
 def main():
-    import sys
-    if sys.argv.__len__() <= 1:
-        target = myip()[0]
+    raw = None
+    if argv.__len__() <= 1:
+        raw = myip()
+        target = raw['ip']
     else:
         target = sys.argv[1]
-    data = locateip(target)
+    if raw and raw['country'] == 'CN':
+        cn = True
+    else:
+        cn = False
+    data = locateip(target, cn)
+    if cn:
+        data = data['data']
     for i in data:
         if data[i]:
             print i + " >>>>> " + data[i]
