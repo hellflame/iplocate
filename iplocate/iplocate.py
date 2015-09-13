@@ -55,7 +55,7 @@ def main():
         data = data['data']
     for i in data:
         if data[i]:
-            print i + " >>>>> " + data[i]
+            print "{} >>>>> {}".format(i, data[i])
 
 
 if __name__ == '__main__':
