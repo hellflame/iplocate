@@ -19,7 +19,7 @@ def locateip(ip, cn=False):
     try:
         handle = urlopen(url)
     except URLError:
-        print('网络连接出现问题')
+        print('网络连接 或 输入ip 出现问题')
         exit(1)
     reader = handle.read()
     handle.close()
@@ -39,7 +39,15 @@ def myip():
     return loads(reader)
 
 
+def help_():
+    print """\ndeploy like below:\n\tiplocate ==> 获取本机外网ip地址\n\tiplocate 192.168.0.1 ==> 获取该ipv4地址信息\n\tiplocate fe80::a9e:1ff:fe8d:9197 ==> 获取该ipv6地址信息"""
+    print
+
+
 def main():
+    if '-h' in argv or '--help' in argv:
+        help_()
+        exit(0)
     raw = None
     if argv.__len__() <= 1:
         raw = myip()
