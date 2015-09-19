@@ -6,15 +6,12 @@ sys.setdefaultencoding("utf8")
 from urllib2 import urlopen, URLError
 from json import loads
 from sys import argv
-cn_urls = "http://ip.taobao.com/service/getIpInfo.php?ip={}"
+# cn_urls = "http://ip.taobao.com/service/getIpInfo.php?ip={}"
 urls = 'http://ipinfo.io/{}/json'
 
 
-def locateip(ip, cn=False):
-    if cn:
-        url = cn_urls.format(ip)
-    else:
-        url = urls.format(ip)
+def locateip(ip):
+    url = urls.format(ip)
     handle = ""
     try:
         handle = urlopen(url)
@@ -48,19 +45,12 @@ def main():
     if '-h' in argv or '--help' in argv:
         help_()
         exit(0)
-    raw = None
     if argv.__len__() <= 1:
         raw = myip()
         target = raw['ip']
     else:
         target = sys.argv[1]
-    if raw and raw['country'] == 'CN':
-        cn = True
-    else:
-        cn = False
-    data = locateip(target, cn)
-    if cn:
-        data = data['data']
+    data = locateip(target)
     for i in data:
         if data[i]:
             print "{} >>>>> {}".format(i, data[i])
