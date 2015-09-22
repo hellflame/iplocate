@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # coding=utf8
 import sys
 reload(sys)
@@ -6,7 +5,6 @@ sys.setdefaultencoding("utf8")
 from urllib2 import urlopen, URLError
 from json import loads
 from sys import argv
-# cn_urls = "http://ip.taobao.com/service/getIpInfo.php?ip={}"
 urls = 'http://ipinfo.io/{}/json'
 
 
@@ -51,9 +49,12 @@ def main():
     else:
         target = sys.argv[1]
     data = locateip(target)
+    print('\n\033[01;32mIP Address:\033[00m: \033[01;31m{}\033[00m\n'.format(data.get('ip', '无法获取目标')))
+    data.pop('ip')
     for i in data:
         if data[i]:
             print "{} >>>>> {}".format(i, data[i])
+    print('')
 
 
 if __name__ == '__main__':
