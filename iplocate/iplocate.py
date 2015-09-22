@@ -49,7 +49,7 @@ def main():
     else:
         target = sys.argv[1]
     data = locateip(target)
-    print('\n\033[01;32mIP Address:\033[00m: \033[01;31m{}\033[00m\n'.format(data.get('ip', '无法获取目标')))
+    print('\n\033[01;32mIP Address \033[00m: \033[01;31m{}\033[00m\n'.format(data.get('ip', '无法获取目标')))
     data.pop('ip')
     for i in data:
         if data[i]:
