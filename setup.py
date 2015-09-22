@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='iplocate',
-    version='0.9.9.2',
+    version='0.9.9.3',
     keywords=('ip', 'ipv4', 'ipv6', 'location', 'ip2location', 'ip to location'),
     description="在终端获取本机或者指定ip地址",
     license="MIT",
@@ -13,6 +13,11 @@ setup(
     author_email="hellflamedly@gmail.com",
     url="https://github.com/hellflame/iplocate",
     packages=find_packages(),
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Programming Language :: Python :: 2.7'
+    ],
     platforms="linux, mac os",
     entry_points={
         'console_scripts': [
