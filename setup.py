@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='iplocate',
-    version='0.9.9',
+    version='0.9.9.1',
     keywords=('ip', 'ipv4', 'ipv6', 'location', 'ip2location', 'ip to location'),
     description="在终端获取本机或者指定ip地址",
     license="MIT",
