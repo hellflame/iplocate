@@ -12,7 +12,7 @@ def locateip(ip):
     url = urls.format(ip)
     handle = ""
     try:
-        handle = urlopen(url)
+        handle = urlopen(url, timeout=5)
     except URLError:
         print('网络连接 或 输入ip 出现问题')
         exit(1)
@@ -25,7 +25,7 @@ def myip():
     __url = "http://ipinfo.io/json"
     handle = ""
     try:
-        handle = urlopen(__url)
+        handle = urlopen(__url, timeout=5)
     except URLError:
         print('网络连接出现问题')
         exit(1)
@@ -35,8 +35,8 @@ def myip():
 
 
 def help_():
-    print """\ndeploy like below:\n\tiplocate ==> 获取本机外网ip地址\n\tiplocate 192.168.0.1 ==> 获取该ipv4地址信息\n\tiplocate fe80::a9e:1ff:fe8d:9197 ==> 获取该ipv6地址信息"""
-    print
+    print ("""\ndeploy like below:\n\tiplocate ==> 获取本机外网ip地址\n\tiplocate 192.168.0.1 ==> 获取该ipv4地址信息\n\tiplocate fe80::a9e:1ff:fe8d:9197 ==> 获取该ipv6地址信息""")
+    print ('')
 
 
 def main():
@@ -53,7 +53,7 @@ def main():
     data.pop('ip')
     for i in data:
         if data[i]:
-            print "{} >>>>> {}".format(i, data[i])
+            print ("{} >>>>> {}".format(i, data[i]))
     print('')
 
 
