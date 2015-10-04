@@ -1,10 +1,10 @@
 # coding=utf8
 import sys
-reload(sys)
-sys.setdefaultencoding("utf8")
 from urllib2 import urlopen, URLError
 from json import loads
 from sys import argv
+reload(sys)
+sys.setdefaultencoding("utf8")
 urls = 'http://ipinfo.io/{}/json'
 
 
@@ -14,7 +14,10 @@ def locateip(ip):
     try:
         handle = urlopen(url, timeout=5)
     except URLError:
-        print('网络连接 或 输入ip 出现问题')
+        print('输入ip 出现问题')
+        exit(1)
+    except Exception:
+        print("网络连接故障")
         exit(1)
     reader = handle.read()
     handle.close()
@@ -28,6 +31,9 @@ def myip():
         handle = urlopen(__url, timeout=5)
     except URLError:
         print('网络连接出现问题')
+        exit(1)
+    except Exception:
+        print("网络连接故障")
         exit(1)
     reader = handle.read()
     handle.close()
