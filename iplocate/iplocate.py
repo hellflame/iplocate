@@ -16,11 +16,11 @@ def locateip(ip):
     except URLError:
         print('输入ip 出现问题')
         exit(1)
-    except Exception:
-        print("网络连接故障")
-        exit(1)
     reader = handle.read()
     handle.close()
+    if not reader:
+        print("获取数据失败，请检查连接状态")
+        exit(1)
     return loads(reader)
 
 
@@ -32,11 +32,11 @@ def myip():
     except URLError:
         print('网络连接出现问题')
         exit(1)
-    except Exception:
-        print("网络连接故障")
-        exit(1)
     reader = handle.read()
     handle.close()
+    if not reader:
+        print("获取数据失败，请检查连接状态")
+        exit(1)
     return loads(reader)
 
 
