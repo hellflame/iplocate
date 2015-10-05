@@ -10,34 +10,34 @@ urls = 'http://ipinfo.io/{}/json'
 
 def locateip(ip):
     url = urls.format(ip)
-    handle = ""
+    reader = ""
     try:
         handle = urlopen(url, timeout=5)
+        reader = loads(handle.read())
+        handle.close()
     except URLError:
         print('输入ip 出现问题')
         exit(1)
-    reader = handle.read()
-    handle.close()
-    if not reader:
+    except ValueError:
         print("获取数据失败，请检查连接状态")
         exit(1)
-    return loads(reader)
+    return reader
 
 
 def myip():
     __url = "http://ipinfo.io/json"
-    handle = ""
+    reader = ''
     try:
         handle = urlopen(__url, timeout=5)
+        reader = loads(handle.read())
+        handle.close()
     except URLError:
         print('网络连接出现问题')
         exit(1)
-    reader = handle.read()
-    handle.close()
-    if not reader:
+    except ValueError:
         print("获取数据失败，请检查连接状态")
         exit(1)
-    return loads(reader)
+    return reader
 
 
 def help_():
