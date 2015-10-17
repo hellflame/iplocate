@@ -3,17 +3,28 @@ import sys
 from urllib2 import urlopen, URLError
 from json import loads
 from sys import argv
+from os import popen
+from instantDB.controller import Controller
 reload(sys)
 sys.setdefaultencoding("utf8")
 urls = 'http://ipinfo.io/{}/json'
+db_path = "{}/.iplocate".format(popen("echo -n $HOME").read())
+# test env db path
+# db_path = "../tempDB"
 
 
 def locateip(ip):
     url = urls.format(ip)
     reader = ""
+    controller = Controller(data_dir=db_path)
     try:
+        result = controller.search(ip)
+        if result:
+            return result
         handle = urlopen(url, timeout=5)
-        reader = loads(handle.read())
+        content = handle.read()
+        reader = loads(content)
+        controller.insert(ip, content)
         handle.close()
     except URLError:
         print('输入ip 出现问题')
@@ -28,8 +39,13 @@ def myip():
     __url = "http://ipinfo.io/json"
     reader = ''
     try:
+        controller = Controller(db_path)
         handle = urlopen(__url, timeout=5)
-        reader = loads(handle.read())
+        content = handle.read()
+        reader = loads(content)
+        result = controller.search(reader['ip'])
+        if not result:
+            controller.insert(reader['ip'], content)
         handle.close()
     except URLError:
         print('网络连接出现问题')
