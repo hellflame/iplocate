@@ -5,7 +5,7 @@ __author__ = 'hellflame'
 
 setup(
     name='iplocate',
-    version='1.1.0',
+    version='1.1.1',
     keywords=('ip', 'ipv4', 'ipv6', 'location', 'ip2location', 'ip to location'),
     description="在终端获取本机或者指定ip地址",
     license="MIT",
@@ -16,13 +16,17 @@ setup(
         'iplocate'
     ],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
+        "Environment :: Console",
+        "Operating System :: MacOS",
+        "Operating System :: MacOS :: MacOS X",
+        "Operating System :: POSIX :: Linux",
         'Programming Language :: Python :: 2.7'
     ],
     install_requires=[
-        "instantDB>=0.0.9"
+        "instantDB>=0.0.10"
     ],
     platforms="any",
     entry_points={
