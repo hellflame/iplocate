@@ -9,6 +9,8 @@ reload(sys)
 sys.setdefaultencoding("utf8")
 urls = 'http://ipinfo.io/{}/json'
 db_path = "{}/.iplocate".format(popen("echo $HOME").read().strip())
+# Mac OS 中 popen("echo -n $HOME").read() 返回值错误 为 "-n /home/home_name"
+# 顾此处统一使用现有方法获取家目录 popen("echo $HOME").read().strip()
 # test env db path
 # db_path = "../tempDB"
 
