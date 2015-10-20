@@ -8,7 +8,7 @@ from instantDB.controller import Controller
 reload(sys)
 sys.setdefaultencoding("utf8")
 urls = 'http://ipinfo.io/{}/json'
-db_path = "{}/.iplocate".format(popen("echo -n $HOME").read())
+db_path = "{}/.iplocate".format(popen("echo $HOME").read().strip())
 # test env db path
 # db_path = "../tempDB"
 
