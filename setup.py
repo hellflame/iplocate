@@ -5,7 +5,7 @@ __author__ = 'hellflame'
 
 setup(
     name='iplocate',
-    version='1.1.2',
+    version='2.0.0',
     keywords=('ip', 'ipv4', 'ipv6', 'location', 'ip2location', 'ip to location'),
     description="在终端获取本机或者指定ip地址",
     license="MIT",
@@ -26,12 +26,12 @@ setup(
         'Programming Language :: Python :: 2.7'
     ],
     install_requires=[
-        "instantDB>=0.0.10"
+        "paramSeeker"
     ],
     platforms="any",
     entry_points={
         'console_scripts': [
-            'iplocate=iplocate.iplocate:main'
+            'iplocate=iplocate.run:main'
         ]
     }
 )
