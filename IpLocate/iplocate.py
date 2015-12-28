@@ -1,7 +1,7 @@
 # coding=utf8
 import urllib2
 import json
-import os
+import socket
 
 
 class IpLocate:
@@ -29,14 +29,14 @@ class IpLocate:
         return self.result
 
     def host_ip(self):
-        result = os.popen("ping -W 2 -c 1 {} 2>/dev/null".format(self.host)).read()
-        from re import compile, I
-        regs = compile("\((.+?)\)", I)
-        result = regs.findall(result)
-        if result:
-            self.ip = result[0]
-            return self.ip
-        return '0.0.0.0'
+        try:
+            socket.setdefaulttimeout(3)
+            result = socket.gethostbyname(self.host)
+            self.ip = result
+            return result
+        except socket.gaierror:
+            print('HOST NAME ERROR')
+            exit(1)
 
     def his_locate(self):
         if self.ip:
@@ -51,7 +51,7 @@ class IpLocate:
 
 
 if __name__ == '__main__':
-    test = IpLocate(host='www.hellflame.com')
-    test.his_locate()
-    print(test.result)
+    test = IpLocate(host='www.baidu.cm')
+    print(test.host_ip())
+    # print(test.result)
 

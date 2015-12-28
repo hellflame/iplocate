@@ -1,2 +1,2 @@
 include CHANGES LICENSE README
-include iplocate *.py
+recursive-include IpLocate *

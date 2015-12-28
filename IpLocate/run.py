@@ -1,7 +1,9 @@
 from paramSeeker.seeker import ParamSeeker
-from iplocate import IpLocate
-from util.tools import left_space
+from IpLocate.iplocate import IpLocate
+from IpLocate.util.tools import left_space
 
+
+__version__ = '2.1.1'
 
 app = ParamSeeker()
 app.set_desc("""little tool to get location by the HOST or the IP""")
@@ -35,6 +37,13 @@ def my_ip(wanted):
     if 'phone' in result:
         container += 'Phone Number{}{}\n'.format(left_space('Phone Number', 20) * ' ', result['phone'])
     return container
+
+
+@app.seek('--version', short='-v', is_mark=True, extra={'desc': 'version info'})
+def show_version(wanted):
+    print('v' + __version__)
+    exit(0)
+
 
 app.set_usage_desc('iplocate')
 app.set_usage_desc('iplocate ip')
