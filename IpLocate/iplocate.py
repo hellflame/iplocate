@@ -37,6 +37,9 @@ class IpLocate:
         except socket.gaierror:
             print('HOST NAME ERROR')
             exit(1)
+        except socket.timeout:
+            print('NETWORK FAILED')
+            exit(1)
 
     def his_locate(self):
         if self.ip:

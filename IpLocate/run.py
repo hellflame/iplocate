@@ -3,7 +3,7 @@ from IpLocate.iplocate import IpLocate
 from IpLocate.util.tools import left_space
 
 
-__version__ = '2.1.1'
+__version__ = '2.1.2'
 
 app = ParamSeeker()
 app.set_desc("""little tool to get location by the HOST or the IP""")
