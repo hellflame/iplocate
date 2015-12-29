@@ -1,7 +1,12 @@
 # coding=utf8
-import urllib2
+import sys
 import json
 import socket
+
+if sys.version_info.major == 2:
+    from urllib2 import urlopen, URLError
+else:
+    from urllib.request import urlopen, URLError
 
 
 class IpLocate:
@@ -12,9 +17,9 @@ class IpLocate:
 
     def retriever(self, urls):
         try:
-            handle = urllib2.urlopen(urls, timeout=2)
+            handle = urlopen(urls, timeout=2)
             result = json.loads(handle.read())
-        except urllib2.URLError:
+        except URLError:
             print("IP FORMAT WRONG")
         except ValueError:
             print("FAILED TO RETRIEVE DATA")
