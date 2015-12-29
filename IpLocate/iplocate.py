@@ -18,13 +18,16 @@ class IpLocate:
     def retriever(self, urls):
         try:
             handle = urlopen(urls, timeout=2)
-            result = json.loads(handle.read())
+            result = json.loads(handle.read().decode('utf8'))
         except URLError:
             print("IP FORMAT WRONG")
+            exit(1)
         except ValueError:
             print("FAILED TO RETRIEVE DATA")
+            exit(2)
         except Exception as e:
             print(type(e))
+            exit(3)
         else:
             self.result = result
 
@@ -61,5 +64,6 @@ class IpLocate:
 if __name__ == '__main__':
     test = IpLocate(host='www.baidu.cm')
     print(test.host_ip())
+    print(test.my_locate())
     # print(test.result)
 
