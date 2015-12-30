@@ -1,9 +1,5 @@
 from paramSeeker.seeker import ParamSeeker
-from IpLocate.iplocate import IpLocate
-from IpLocate.util.tools import left_space
-
-
-__version__ = '2.2.1'
+from IpLocate import IpLocate, __version__, left_space
 
 app = ParamSeeker()
 app.set_desc("""little tool to get location by the HOST or the IP""")
