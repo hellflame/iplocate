@@ -1,8 +1,16 @@
 from paramSeeker.seeker import ParamSeeker
-from IpLocate import IpLocate, __version__, left_space
+from IpLocate import IpLocate, __version__
 
 app = ParamSeeker()
 app.set_desc("""little tool to get location by the HOST or the IP""")
+
+
+def left_space(key, max_len):
+    target_len = len(key)
+    if max_len > target_len:
+        return max_len - target_len
+    else:
+        return 0
 
 
 @app.seek(extra={'default': '127.0.0.1'})
