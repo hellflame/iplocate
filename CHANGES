@@ -9,3 +9,4 @@
 2.0.0 使用paramseeker开始重写
 2.1.0 socket替换ping
 2.2.0 py3 support
+2.2.3 py2 encoding setting

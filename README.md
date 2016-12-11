@@ -1,11 +1,71 @@
 # iplocate
 
+查询目标IP或本机IP所记载的物理位置信息
+
+[API](http://ipinfo.io)
+
+整个项目基本都是依赖API，ip信息貌似会有更新，变动可能还比较大，所以就没有本地存储了
+
+个人主要用来查看攻击者大概的来源
+
+### Install
+
+```bash
+	$ sudo pip install iplocate --upgrade
+```
+
+### Usage
+
+#### Command
+
 > 终端调用方式
+
 ```bash
  $ iplocate
  $ iplocate 127.0.0.1
- $ iplocate -h
+ $ iplocate -h # 显示帮助信息
 ```
+
+1. 默认直接输入`iplocate`将会查询本机ip对应的物理地址
+2. `iplocate`后跟ipv4或ipv6地址，将会尝试获取该地址对应记录的物理地址
+3. `iplocate`后跟域名，本机将会尝试连接目标服务器，确定ip地址，然后尝试获取该ip对应的物理地址
+
+![获取本机ip](https://static.hellflame.net/resource/bd65a3f23dc3401799e1070ea9f92c17)
+
+![获取目标ip](https://static.hellflame.net/resource/e1b8e823e3751b9a7a8b38be1f7a11f7)
+
+![获取目标host](https://static.hellflame.net/resource/79241896584a5900c416052c7a83b295)
+
+![获取目标ipv6](https://static.hellflame.net/resource/6f137d12f6a86cadea56241e906bac64)
+
+原本目标域名有可能是绑定的ipv6地址，不过现在暂时没有尝试连接ipv6，这并不是API的问题，只是作者暂时用不到而已，，，，
+
+#### Import
+
+> my location
+
+```python
+	from IpLocate import IpLocate
+	iplocate = IpLocate()
+	my_loc = iplocate.my_locate()
+	
+```
+
+> target ip location
+
+```python
+	iplocate = IpLocate(ip='127.0.0.1')
+	his_location = iplocate.his_locate()
+```
+
+> target host location
+
+```python
+	iplocate = IpLocate(host="www.google.com")
+	his_location = iplocate.his_locate()
+```
+
+### [API REF](http://ipinfo.io/)
 
 
 ### History
@@ -23,3 +83,4 @@
 + 2.0.0 => 使用paramseeker开始重写
 + 2.1.0 => socket替换ping
 + 2.2.0 => py3 support
++ 2.2.3 => py2 encoding setting

@@ -1,5 +1,11 @@
+# coding=utf8
 from paramSeeker.seeker import ParamSeeker
 from IpLocate import IpLocate, __version__
+import sys
+
+if sys.version_info.major == 2:
+    reload(sys)
+    sys.setdefaultencoding("utf8")
 
 app = ParamSeeker()
 app.set_desc("""little tool to get location by the HOST or the IP""")

@@ -5,14 +5,14 @@ __author__ = 'hellflame'
 
 setup(
     name='iplocate',
-    version='2.2.2',
+    version='2.2.3',
     keywords=('ip', 'ipv4', 'ipv6', 'location', 'ip2location', 'ip to location'),
     description="在终端获取本机或者指定ip地址",
     license="MIT",
     author='hellflame',
     author_email="hellflamedly@gmail.com",
     url="https://github.com/hellflame/iplocate",
-    packages=['IpLocate', 'IpLocate.util'],
+    packages=['IpLocate'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
