@@ -1,14 +1,26 @@
 # coding=utf8
-from paramSeeker.seeker import ParamSeeker
-from IpLocate import IpLocate, __version__
+
 import sys
+import platform
+from argparse import ArgumentParser
+
+from IpLocate import IpLocate, __version__
 
 if sys.version_info.major == 2:
     reload(sys)
     sys.setdefaultencoding("utf8")
 
-app = ParamSeeker()
-app.set_desc("""little tool to get location by the HOST or the IP""")
+
+def parser():
+    _parser = ArgumentParser(description="little tool to get location by the HOST or the IP")
+    _parser.add_argument("ip", default=[], nargs="*", help="target ip or hostname")
+    _parser.add_argument("-v", "--version", action="store_true", help="show version")
+    return _parser.parse_args()
+
+
+def disable_color():
+    if platform.system().lower() == "windows":
+        return True
 
 
 def left_space(key, max_len):
@@ -19,49 +31,43 @@ def left_space(key, max_len):
         return 0
 
 
-@app.seek(extra={'default': '127.0.0.1'})
-def my_ip(wanted):
-    ip_addr = IpLocate()
-    if wanted == '127.0.0.1':
-        result = ip_addr.my_locate()
+def generate(target):
+    iplocate = IpLocate()
+    if not target:
+        result = iplocate.my_locate()
     else:
-        if ':' in wanted or wanted.split('.')[-1].isdigit():
-            ip_addr.ip = wanted
+        if ':' in target or target.split('.')[-1].isdigit():
+            iplocate.ip = target
         else:
-            ip_addr.host = wanted
-        result = ip_addr.his_locate()
-    container = "\n{}\033[01;32m{}\033[00m\n\n".format(5 * ' ', result.get('ip', '0.0.0.0'))
-    container += "LAT/LON{}{}\n".format(left_space('LAT/LON', 20) * ' ', result.get('loc', 'unable to retrieve'))
-    if 'country' in result:
-        container += 'Country{}{}\n'.format(left_space('country', 20) * ' ', result['country'])
-    if 'region' in result:
-        container += 'Region{}{}\n'.format(left_space('region', 20) * ' ', result['region'])
-    if 'city' in result:
-        container += 'City{}{}\n'.format(left_space('city', 20) * ' ', result['city'])
-    if 'hostname' in result and not result['hostname'] == 'No Hostname':
-        container += 'Hostname{}{}\n'.format(left_space('hostname', 20) * ' ', result['hostname'])
-    if 'postal' in result:
-        container += 'Postal Code{}{}\n'.format(left_space('Postal Code', 20) * ' ', result['postal'])
-    if 'org' in result:
-        container += 'Network{}{}\n'.format(left_space('Network', 20) * ' ', result['org'])
-    if 'phone' in result:
-        container += 'Phone Number{}{}\n'.format(left_space('Phone Number', 20) * ' ', result['phone'])
-    return container
+            iplocate.host = target
+        result = iplocate.his_locate()
+
+    ip = " " * 5 + result.pop("ip", "0.0.0.0")
+    result.pop("readme", "")
+    if not disable_color():
+        ip = "\033[01;32m{}\033[00m".format(ip)
+    title = "\n{}\n\n".format(ip)
+    container = "\n".join(["{}{}{}".format(k.title(), " " * left_space(k, 20), v)
+                           for k, v in sorted(result.items())])
+    return title + container
 
 
-@app.seek('--version', short='-v', is_mark=True, extra={'desc': 'version info'})
-def show_version(wanted):
-    print('v' + __version__)
-    exit(0)
+def run():
+    args = parser()
+    if args.version:
+        print("iplocate v{}".format(__version__))
+        return
 
-
-app.set_usage_desc('iplocate')
-app.set_usage_desc('iplocate ip')
-app.set_usage_desc('iplocate hostname')
+    if not args.ip:
+        print(generate(None))
+        return
+    for target in args.ip:
+        print(generate(target))
+    return
 
 
 def main():
-    app.run()
+    run()
 
 
 if __name__ == '__main__':

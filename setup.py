@@ -5,7 +5,7 @@ __author__ = 'hellflame'
 
 setup(
     name='iplocate',
-    version='2.2.3',
+    version='2.3.0',
     keywords=('ip', 'ipv4', 'ipv6', 'location', 'ip2location', 'ip to location'),
     description="在终端获取本机或者指定ip地址",
     license="MIT",
@@ -24,9 +24,6 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4'
-    ],
-    install_requires=[
-        "paramSeeker"
     ],
     platforms="any",
     entry_points={

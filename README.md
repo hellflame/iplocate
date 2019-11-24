@@ -30,14 +30,6 @@
 2. `iplocate`后跟ipv4或ipv6地址，将会尝试获取该地址对应记录的物理地址
 3. `iplocate`后跟域名，本机将会尝试连接目标服务器，确定ip地址，然后尝试获取该ip对应的物理地址
 
-![获取本机ip](https://static.hellflame.net/resource/bd65a3f23dc3401799e1070ea9f92c17)
-
-![获取目标ip](https://static.hellflame.net/resource/e1b8e823e3751b9a7a8b38be1f7a11f7)
-
-![获取目标host](https://static.hellflame.net/resource/79241896584a5900c416052c7a83b295)
-
-![获取目标ipv6](https://static.hellflame.net/resource/6f137d12f6a86cadea56241e906bac64)
-
 原本目标域名有可能是绑定的ipv6地址，不过现在暂时没有尝试连接ipv6，这并不是API的问题，只是作者暂时用不到而已，，，，
 
 #### Import
@@ -84,3 +76,4 @@
 + 2.1.0 => socket替换ping
 + 2.2.0 => py3 support
 + 2.2.3 => py2 encoding setting
++ 2.3.0 => replace paramseeker with argparse
