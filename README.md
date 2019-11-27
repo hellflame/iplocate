@@ -4,6 +4,8 @@
 
 [API](http://ipinfo.io)
 
+> Golang 版本: [https://github.com/hellflame/ipinfo](https://github.com/hellflame/ipinfo)
+
 整个项目基本都是依赖API，ip信息貌似会有更新，变动可能还比较大，所以就没有本地存储了
 
 个人主要用来查看攻击者大概的来源
